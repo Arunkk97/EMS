@@ -48,13 +48,13 @@ function Home() {
                 <table className='table mt-5'>
                     <thead>
                         <tr >
-                            {/* <th>Sl No.</th> */}
-                            <th>Id</th>
+                            <th>Sl No.</th>
+                            {/* <th>Id</th> */}
                             <th >Employee Name</th>
                             <th>Age</th>
                             <th>Designation</th>
                             <th>Salary</th>
-                            <th>Time Stamp</th>
+                            <th>Date & Time</th>
                             <th>Action</th>
 
                         </tr>
@@ -63,8 +63,8 @@ function Home() {
                         {
                             allEmployees?.length > 0 ? allEmployees?.map((details, index) => (
                                 <tr key={index} >
-                                    {/* <td>{index + 1}</td> */}
-                                    <td>{details.id}</td>
+                                    <td>{index + 1}</td>
+                                    {/* <td>{details.id}</td> */}
                                     <td >{details.employeeName}</td>
                                     <td>{details.age}</td>
                                     <td>{details.designation}</td>
