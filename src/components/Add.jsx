@@ -4,7 +4,7 @@ import { allEmployeesAPI } from '../services/allAPI';
 
 
 
-function Add({setEmployeeUpdate}) {
+function Add({ setEmployeeUpdate }) {
   const [employeeDetails, setEmployeeDetails] = useState({
     employeeName: '',
     age: '',
@@ -23,20 +23,29 @@ function Add({setEmployeeUpdate}) {
 
   const handleDetails = async () => {
     const { employeeName, age, designation, salary } = employeeDetails
+
+    let timeData = new Date()
+    let timeStamp = new Intl.DateTimeFormat('en-us', {
+      year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'
+    }).format(timeData)
+    console.log(timeStamp);
+
+
     if (employeeName && age && designation && salary) {
-      const result = await allEmployeesAPI(employeeDetails)
+      const result = await allEmployeesAPI({employeeName, age, designation, salary,timeStamp})
       console.log(result.data);
-      if(result.status>=200 && result.status<300){
+      if (result.status >= 200 && result.status < 300) {
         alert(`${result.data.employeeName} details successfully added`)
         setEmployeeUpdate(result?.data)
         handleClose()
 
-      }else{
+      } 
+      else {
         alert('Failed to fetch API')
       }
-      
 
-    } else {
+    } 
+    else {
       alert('Please fill the form completely!!!')
     }
   }

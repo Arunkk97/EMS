@@ -17,3 +17,9 @@ export const getAllEmployeeDetailsAPI=async()=>{
 export const removeEmployeeDetailsAPI=async(empId)=>{
     return await commonAPI("DELETE",`${SERVER_URL}/employeeDetails/${empId}`,{})
 }
+
+//update employee details
+
+export const updateEmployeeDetailsAPI=async(empId,updatedEmployee)=>{
+    return await commonAPI("PUT",`${SERVER_URL}/employeeDetails/${empId}`,updatedEmployee)
+}

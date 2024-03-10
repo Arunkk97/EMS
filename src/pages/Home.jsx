@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Add from '../components/Add'
 import { getAllEmployeeDetailsAPI, removeEmployeeDetailsAPI } from '../services/allAPI'
 
+
+
+
+
 function Home() {
 
     const [allEmployees, setAllEmployees] = useState([])
-    const[employeeUpdate,setEmployeeUpdate]=useState("")
+    const [employeeUpdate, setEmployeeUpdate] = useState("")
 
 
     const getAllEmployeeDetails = async () => {
@@ -14,9 +18,7 @@ function Home() {
         if (result?.status == 200) {
             //    console.log(result?.data);
             setAllEmployees(result.data)
-
         }
-
     }
 
     useEffect(() => {
@@ -24,21 +26,20 @@ function Home() {
 
     }, [employeeUpdate])
 
-    console.log(allEmployees);
+    // console.log(allEmployees);
 
-    const deleteEmp=async(empId)=>{
+    const deleteEmp = async (empId) => {
         await removeEmployeeDetailsAPI(empId)
         getAllEmployeeDetails()
     }
 
-
-
+    
 
     return (
         <>
 
             <div className='container'>
-                <Add setEmployeeUpdate={setEmployeeUpdate}/>
+                <Add setEmployeeUpdate={setEmployeeUpdate} />
             </div>
 
             <div className='container mt-3 border rounded p-3'>
@@ -46,12 +47,14 @@ function Home() {
 
                 <table className='table mt-5'>
                     <thead>
-                        <tr>
+                        <tr >
+                            {/* <th>Sl No.</th> */}
                             <th>Id</th>
-                            <th>Employee Name</th>
+                            <th >Employee Name</th>
                             <th>Age</th>
                             <th>Designation</th>
                             <th>Salary</th>
+                            <th>Time Stamp</th>
                             <th>Action</th>
 
                         </tr>
@@ -59,22 +62,28 @@ function Home() {
                     <tbody>
                         {
                             allEmployees?.length > 0 ? allEmployees?.map((details, index) => (
-                                <tr key={index}>
-                                    <td>{index+1}</td>
-                                    <td>{details.employeeName}</td>
+                                <tr key={index} >
+                                    {/* <td>{index + 1}</td> */}
+                                    <td>{details.id}</td>
+                                    <td >{details.employeeName}</td>
                                     <td>{details.age}</td>
                                     <td>{details.designation}</td>
                                     <td>{details.salary}</td>
-                                    <td><button onClick={()=>deleteEmp(details.id)} className='btn'><i className="fa-solid fa-trash text-danger py-2"></i></button></td>
+                                    <td>{details.timeStamp}</td>
+                                    <td><button onClick={() => deleteEmp(details.id)} className='btn'><i className="fa-solid fa-trash text-danger py-2"></i></button></td>
 
                                 </tr>
-                            )):<div className='text-danger fw-bolder'>Nothing to display</div>
+                            )) : <div className='text-danger fw-bolder'>Nothing to display</div>
                         }
                     </tbody>
                 </table>
-
-
             </div>
+
+            
+
+
+
+
         </>
     )
 }
